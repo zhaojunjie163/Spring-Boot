@@ -1,7 +1,10 @@
-package com.example.demo.topic;
+package com.example.demo.course;
+
+import com.example.demo.topic.Topic;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by zhaojunjie on 5/8/17.
@@ -17,7 +20,7 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class Topic {
+public class Course {
 
     @Id
     public String id;
@@ -25,16 +28,21 @@ public class Topic {
     public String description;
 
 
+
+    @ManyToOne
+    Topic topic;
+
     /**
      * Have to have an empty construtor which will be using by JPA
      */
-    public Topic() {
+    public Course() {
     }
 
-    public Topic(String id, String name, String description) {
+    public Course(String id, String name, String description, String topicId) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.topic = new Topic(topicId,"","");
     }
 
     public String getId() {
@@ -61,5 +69,12 @@ public class Topic {
         this.name = name;
     }
 
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic mTopic) {
+        this.topic = mTopic;
+    }
 
 }
